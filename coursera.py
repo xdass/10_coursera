@@ -1,6 +1,6 @@
 import requests
 import bs4
-import openpyxl
+from openpyxl import Workbook
 from lxml import etree
 
 HEADER_FOR_RU = {'accept-language': 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'}
@@ -32,14 +32,16 @@ def get_course_info(course_url):
     }
 
 
-def collect_courses_info():
-    pass
+def collect_courses_info(url_list):
+    courses_list = []
+    for url in url_list:
+        print(url)
 
 
 def output_courses_info_to_xlsx(filepath):
-    pass
+    wb = Workbook()
 
 
 if __name__ == '__main__':
     courses_links = get_courses_url_list()
-    get_course_info(courses_links[1])
+    collect_courses_info(courses_links)
