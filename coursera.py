@@ -7,15 +7,15 @@ HEADER_FOR_RU = {'accept-language': 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4'}
 
 
 def get_courses_url_list(courses_to_parse=20):
-    result = requests.get('https://www.coursera.org/sitemap~www~courses.xml')
-    tree = etree.fromstring(result.content)
+    xml_response = requests.get('https://www.coursera.org/sitemap~www~courses.xml')
+    tree = etree.fromstring(xml_response.content)
     links = [node[0].text for node in tree]
     return links[:courses_to_parse]
 
 
 def get_course_info(course_url):
-    r = requests.get(course_url, headers=HEADER_FOR_RU)
-    soup = bs4.BeautifulSoup(r.content, 'lxml')
+    html_response = requests.get(course_url, headers=HEADER_FOR_RU)
+    soup = bs4.BeautifulSoup(html_response.content, 'lxml')
     course_title = soup.select_one('.title').string
     course_start_date = soup.select_one('.startdate span').string
     course_language = soup.select_one('.rc-Language').text
@@ -63,9 +63,10 @@ def output_courses_info_to_xlsx(courses):
     wb.save('coursera_courses.xlsx')
 
 if __name__ == '__main__':
-    print('Parse courses links....')
-    courses_links = get_courses_url_list()
-    print('Start parsing courses data....')
-    courses_info_list = collect_courses_info(courses_links)
-    print('Save to file')
-    output_courses_info_to_xlsx(courses_info_list)
+    print(type(requests.get('http://e1.ru')))
+    # print('Parse courses links....')
+    # courses_links = get_courses_url_list()
+    # print('Start parsing courses data....')
+    # courses_info_list = collect_courses_info(courses_links)
+    # print('Save to file')
+    # output_courses_info_to_xlsx(courses_info_list)
