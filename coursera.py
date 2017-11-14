@@ -63,10 +63,9 @@ def output_courses_info_to_xlsx(courses):
     wb.save('coursera_courses.xlsx')
 
 if __name__ == '__main__':
-    print(type(requests.get('http://e1.ru')))
-    # print('Parse courses links....')
-    # courses_links = get_courses_url_list()
-    # print('Start parsing courses data....')
-    # courses_info_list = collect_courses_info(courses_links)
-    # print('Save to file')
-    # output_courses_info_to_xlsx(courses_info_list)
+    print('Parse courses links....')
+    courses_links = get_courses_url_list()
+    print('Start parsing courses data....')
+    courses_info_list = collect_courses_info(courses_links)
+    print('Save to file')
+    output_courses_info_to_xlsx(courses_info_list)

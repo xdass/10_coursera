@@ -7,7 +7,6 @@ Script saves the following information:
 * Course weeks
 * Course rating
 
-[TODO. There will be project description]
 # How to install
 You need to install some packages.
 ```bash
